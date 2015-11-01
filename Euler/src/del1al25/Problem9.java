@@ -10,24 +10,34 @@ public class Problem9 {
 
 	public static void main(String[] args) {
 
-		int pyt = 0, suma = 0, product = 0, c = 0;
+		int a, b = 0;
+		double apow, bpow, sqrt = 0, sum = 0;
 
-		for(int a = 1; suma != 1000; a++) {
-			for(int b = 1; suma != 1000; b++) {
-				if(pyt < (a+b)) {
-					pyt = (int) (Math.pow(a, 2) + Math.pow(b, 2));
-					c = (int) (Math.sqrt(pyt));
-					suma = (a + b + c);
-					System.out.println(suma); }
+		long begin = System.currentTimeMillis();
+		
+		outerloop:
+		for(a = 3; a < 1000; a++) {
+			for(b = 4; b < 1000; b++) {
+				apow = Math.pow(a, 2);
+				bpow = Math.pow(b, 2);
+				sqrt = Math.sqrt(apow + bpow);
 
-				if(suma == 1000 && pyt == Math.pow(c,2)) {
-					product = (a*b*c); }
+				if(sqrt % 1 == 0) {
+					sum = a + b + sqrt;
+				}
 
-
+				if(sum == 1000)
+					break outerloop;
 			}
 		}
-
-		System.out.println(product);
+		
+		int mult = a * b * (int) sqrt;
+		
+		long end = System.currentTimeMillis();
+		
+		System.out.println("a = " + a + ", b = " + b + ", c = " + sqrt);
+		System.out.println("The product of the triplets is: " + mult);
+		System.out.println("The program took " + (end - begin) + "ms to run!");
 
 	}
 

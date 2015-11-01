@@ -12,72 +12,52 @@
 
 package del1al25;
 
+import java.util.LinkedList;
+
 public class Problem14 {
+
+	static long chain = 0, number, max = 0, maxN = 0;;
+	static LinkedList<Long> list = new LinkedList<Long>();
 
 	public static void main(String[] args) {
 
-		int number = 2, length = 0, maxL = 0, maxNum = 0;
-
-		while(number < 500000) {
-			int a = number;
-
+		for(number = 1; number < 1000000; number++) {
+			long a = number;
 			while(a != 1) {
-				if(a % 2 == 0)
-					a = a/2;
-				else
-					a = 3*a + 1;
-				length++;
+				if(a % 2 == 0) {
+					a = (a/2);
+					list.add(a);
+				}
+				else {
+					a = (a*3) + 1;
+					list.add(a);
+				}
 			}
 
-			if(length > maxL) {
-				maxL = length;
-				maxNum = number;
+			if(list.size() > max) {
+				max = list.size();
+				maxN = number;
 			}
-
-			length = 0;
-			number++;
+			list.clear();
 		}
 
-		System.out.println(maxNum);
-		System.out.println(maxL);
+		System.out.println(max + " " + maxN);
 
 	}
 
+	public static long collatz(long number) {
+		while(number != 1) {
+			if(number % 2 == 0) {
+				number = (number/2);
+				list.add(number);
+			}
+			else {
+				number = (number*3) + 1;
+				list.add(number);
+			}
+		}
+		System.out.println(number + " " + list.size());
+		return list.size();
+	}
+
 }
-
-
-//public static void main(String[] args) {
-//
-//	int number = 2, max = 0;
-//	ArrayList<Integer> seq = new ArrayList<>();
-//	ArrayList<Integer> maxSeq = new ArrayList<>();
-//
-//	while(number < 500000) {
-//		int a = number;
-//		seq.add(a);
-//
-//		while(a != 1) {
-//			if(a % 2 == 0) {
-//				a = a/2;
-//				seq.add(a);
-//			}
-//			else {
-//				a = 3*a + 1;
-//				seq.add(a);
-//			}
-//			length++;
-//		}
-//		if(seq.size() > max) {
-//			max = seq.size();
-//			maxSeq.clear();
-//			maxSeq.addAll(seq);
-//
-//		}
-//		//System.out.println(maxSeq);
-//		seq.clear();
-//		number++;
-//	}
-//
-//	System.out.println(maxSeq);
-//
-//}
